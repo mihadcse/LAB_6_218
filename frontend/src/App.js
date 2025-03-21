@@ -3,7 +3,7 @@ import Axios from "axios";
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-const API_URL = "http://localhost:3001/api/users";
+const API_URL = "http://localhost:3000/api/users";
 
 const App = () => {
 
