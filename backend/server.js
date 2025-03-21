@@ -39,6 +39,27 @@ app.get("/api/users", async (req, res) => {
   }
 });
 
+// Updating a user
+app.put("/api/users/:id", async (req, res) => { 
+  try {
+    const { name, email, password } = req.body;
+    const updatedUser = await User.findByIdAndUpdate(req.params.id, { name, email, password }, { new: true });
+    res.json({ message: "User updated successfully", updatedUser });
+  } catch (error) {
+    res.status(500).json({ message: "Error updating user", error });
+  }
+});
+
+// Deleting a user
+app.delete("/api/users/:id", async (req, res) => { 
+  try {
+    await User.findByIdAndDelete(req.params.id);
+    res.json({ message: "User deleted successfully" });
+  } catch (error) {
+    res.status(500).json({ message: "Error deleting user", error });
+  }
+});
+
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
