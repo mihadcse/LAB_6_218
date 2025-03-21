@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import Axios from "axios";
 
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 const API_URL = "http://localhost:3001/api/users";
 
 const App = () => {
@@ -65,80 +67,83 @@ const App = () => {
 
 
   return (
-    <div>
-      <h1>CRUD OPERATIONS IN USER MANAGEMENT</h1>
+    <div className='container'>
+      <h1 className="text-center my-4">CRUD OPERATIONS IN USER MANAGEMENT</h1>
 
       {/* Add User Form */}
-      <form onSubmit={(e) => { e.preventDefault(); addUser(); }}>
-        <h2>Add User</h2>
-        <input
-          type="text"
-          placeholder="Enter name"
-          value={newUser.name}
-          onChange={(e) => setNewUser({ ...newUser, name: e.target.value })}
-          required
-        />
-        <input
-          type="email"
-          placeholder="Enter email"
-          value={newUser.email}
-          onChange={(e) => setNewUser({ ...newUser, email: e.target.value })}
-          required
-        />
-        <input
-          type="password"
-          placeholder="Enter password"
-          value={newUser.password}
-          onChange={(e) => setNewUser({ ...newUser, password: e.target.value })}
-          required
-        />
-        <button type="submit">Add User</button>
+      <form className="border p-2 text-center" onSubmit={(e) => { e.preventDefault(); addUser(); }}>
+        <h2 className="text-center my-4">Add User</h2>
+        <div className='mb-3'>
+          <input
+            type="text"
+            placeholder="Enter name"
+            value={newUser.name}
+            onChange={(e) => setNewUser({ ...newUser, name: e.target.value })}
+            required
+          />
+          <input
+            type="email"
+            placeholder="Enter email"
+            value={newUser.email}
+            onChange={(e) => setNewUser({ ...newUser, email: e.target.value })}
+            required
+          />
+          <input
+            type="password"
+            placeholder="Enter password"
+            value={newUser.password}
+            onChange={(e) => setNewUser({ ...newUser, password: e.target.value })}
+            required
+          />
+        </div>
+        <button type="submit" className="btn btn-success w-20">Add User</button>
       </form>
 
       {/* Edit User Form (Appears when edit button is clicked) */}
       {editUser && (
-        <form
+        <form className="border p-2 text-center"
           onSubmit={(e) => {
             e.preventDefault();
             updateUser();
             alert("User Updated Successfully!");
           }}
-          style={{ border: "1px solid #ccc", padding: "10px", marginTop: "10px" }}
         >
-          <h2>Edit User</h2>
-          <input
-            type="text"
-            name="name"
-            value={editForm.name}
-            onChange={handleEditChange}
-            placeholder="Enter new name"
-            required
-          />
-          <input
-            type="email"
-            name="email"
-            value={editForm.email}
-            onChange={handleEditChange}
-            placeholder="Enter new email"
-            required
-          />
-          <input
-            type="password"
-            name="password"
-            value={editForm.password}
-            onChange={handleEditChange}
-            placeholder="Enter new password"
-            required
-          />
-          <button type="submit">Update</button>
-          <button type="button" onClick={() => setEditUser(null)}>Cancel</button>
+          <h2 className="text-center my-4">Edit User</h2>
+          <div className='mb-3'>
+            <input
+              type="text"
+              name="name"
+              value={editForm.name}
+              onChange={handleEditChange}
+              placeholder="Enter new name"
+              required
+            />
+            <input
+              type="email"
+              name="email"
+              value={editForm.email}
+              onChange={handleEditChange}
+              placeholder="Enter new email"
+              required
+            />
+            <input
+              type="password"
+              name="password"
+              value={editForm.password}
+              onChange={handleEditChange}
+              placeholder="Enter new password"
+              required
+            />
+          </div>
+          <button type="submit" className="btn btn-primary w-20 mx-2">Update</button>
+          <button type="button" className="btn btn-warning w-20 mx-2" onClick={() => setEditUser(null)}>Cancel</button>
         </form>
       )}
-      
+
       <br />
       <br />
       {/* List of Users in a Table */}
-      <table border="1">
+      <table className="table table-bordered mt-4">
         <thead>
           <tr>
             <th>Name</th>
@@ -152,8 +157,8 @@ const App = () => {
               <td>{user.name}</td>
               <td>{user.email}</td>
               <td>
-                <button onClick={() => openEditForm(user)}>Edit</button>
-                <button onClick={() => deleteUser(user._id)}>Delete</button>
+                <button class="btn btn-info mx-2" onClick={() => openEditForm(user)}>Edit</button>
+                <button class="btn btn-danger mx-2"onClick={() => deleteUser(user._id)}>Delete</button>
               </td>
             </tr>
           ))}
